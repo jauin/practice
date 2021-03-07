@@ -1,0 +1,15 @@
+version: '3'
+services:
+  datascience-notebook:
+      image: jupyter/datascience-notebook
+      environment:
+        - ACCESS_TOKEN=sha1:17adf2c78f67:d6d478f5b88eb9478105c27da81a3b93c3daa6b8
+      volumes:
+        - ./:/home/jovyan/work
+#        - ./note/datasets:/home/jovyan/work/datasets
+#        - ./note/modules:/home/jovyan/work/modules
+      ports:
+        - 9999:8888
+      container_name:   jupyter_notebook
+      command: "start-notebook.sh \
+        --NotebookApp.password=sha1:17adf2c78f67:d6d478f5b88eb9478105c27da81a3b93c3daa6b8"
