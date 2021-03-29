@@ -1,0 +1,36 @@
+version: "3"
+
+services:
+    
+    db:
+        # 컨테이너 이름 지정
+        container_name: db
+
+        # image 지정 - official images로 컨테이너 생성
+        image: mysql:latest
+
+        environment:
+            MYSQL_DATABASE:
+            MYSQL_USER:
+            MYSQL_PASSWORD:
+            MYSQL_ROOT_PASSWORD: 1234
+
+        # 호스트에 있는 폴더를 컨테이너 안에 있는 폴더로 마운트
+        volumes:
+            - ./db:/var/lib/mysql:rw
+
+        # 연결포트 설정
+        ports:
+            - "3306:3306"
+        expose:
+            - "3306"
+
+    phpmyadmin:
+        container_name: phpmyadmin
+        image: phpmyadmin:latest
+        depends_on:
+            - db
+        environment:
+            MYSQL_HOST: db
+        ports:
+            - "88:80"
